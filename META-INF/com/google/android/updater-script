@@ -1,0 +1,23 @@
+########################################
+# TotsukaOS installation script by soulr344@xda
+########################################
+
+show_progress(1.000000, 0);
+ui_print("--------------------------------------------------");
+ui_print(" GSI Flasher");
+ui_print("--------------------------------------------------");
+ui_print(" Extracting script..");
+package_extract_dir("scripts", "/tmp/scripts");
+set_metadata_recursive("/tmp/scripts", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0777);
+
+ui_print(" Extracting GSI Image..");
+package_extract_dir("gsi", "/sdcard/.gsi");
+
+ui_print(" Flashing GSI..");
+run_program("/sbin/sh", "/tmp/scripts/script.sh", map_partition("system"));
+
+ui_print("--------------------------------------------------");
+ui_print(" Successfully flashed GSI!");
+ui_print(" NOTE: please wipe data");
+ui_print("  to avoid issues.");
+ui_print("--------------------------------------------------");
